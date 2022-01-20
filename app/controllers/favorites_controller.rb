@@ -10,7 +10,7 @@ class FavoritesController < ApplicationController
     # 上記2行によって、Favoriteインスタンスに必要なカラム全てに値を代入したため、
     # saveメソッド実行
     favorite.save
-    ##リファラ（リンク元のパス）を取得し、そのパスに遷移
+    # リファラ（リンク元のパス）を取得し、そのパスに遷移
     redirect_to request.referer
   end
 

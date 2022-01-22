@@ -1,3 +1,4 @@
+<!--投稿本の詳細画面-->
 <div class='container'>
   <div class='row'>
     <div class='col-md-3'>
@@ -36,7 +37,9 @@
             コメント数:<%= @book.book_comments.count %>
           </td>
           <% if @book.user == current_user %>
+            <!--投稿本の編集-->
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
+            <!--投稿本の削除-->
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% else %>
             <td></td>
@@ -59,8 +62,12 @@
                     <p><%= book_comment.comment %></p>
                 </th>
                 <th>
+                  <!--コメント削除ボタン-->
                   <% if book_comment.user_id == current_user.id %>
                     <%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),class: "text-center btn btn-danger",method: :delete %>
+                    <!--質問結果-->
+                    <!--１つ目の変数「book_comment.book」部分は、投稿詳細画面に表示されている-->
+                    <!--本のidが入力されればよいので、今回の場合は「book_comment」や「@book」で代用可能-->
                   <% end %>
                 </th>
               </tr>

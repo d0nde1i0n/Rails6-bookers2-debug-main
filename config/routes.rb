@@ -14,6 +14,6 @@ Rails.application.routes.draw do
     # あるユーザがフォローしているユーザを全てを取得
     get :followers, on: :member
     # あるユーザをフォローしているユーザを全てを取得
-    get :followeds, on: :member
+    get :followings, on: :member
   end
 end

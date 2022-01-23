@@ -17,9 +17,9 @@ class UsersController < ApplicationController
     @users = user.followers
   end
 
-  def followeds
+  def followings
     user = User.find(params[:id])
-    @users = user.followeds
+    @users = user.followings
   end
 
   def edit

@@ -10,11 +10,11 @@
   </tr>
   <tr>
     <th>follows</th>
-    <th><%= link_to "#{user.followers.count}",followers_user_path(user)%></th>
+    <th><%= link_to "#{user.followings.count}",followings_user_path(user)%></th>
   </tr>
   <tr>
     <th>followers</th>
-    <th><%= link_to "#{user.followeds.count}",followeds_user_path(user)%></th>
+    <th><%= link_to "#{user.followers.count}",followers_user_path(user)%></th>
   </tr>
 </table>
 <div class='row'>
@@ -25,7 +25,7 @@
     <% end %>
   <% else %>
     <!--ログインユーザにフォローされているかを判別-->
-    <% if user.is_followed_by?(current_user) %>
+    <% if user.is_follower_by?(current_user) %>
       <%= link_to "フォロー解除",user_relationships_path(user),class: "btn btn-danger",method: :delete %>
     <% else %>
       <%= link_to "フォロー",user_relationships_path(user),class: "btn btn-success",method: :post %>

@@ -1,3 +1,4 @@
+<!--FollowUser画面-->
 <div class='container'>
   <div class='row'>
     <h1>Follow Users</h1>
@@ -10,3 +11,11 @@
     <% end %>
   </div>
 </div>
+
+<!--「ログインユーザがフォローしているユーザ一覧」を取得する流れ-->
+<!--1.ログインユーザのidを取得する。                            -->
+<!--2.フォローするユーザから見た中間テーブル(relationships)から、
+      その中間テーブルのFK(follower_id)＝ログインユーザidとなる
+      レコードを全て取得                                        -->
+<!--3. 2.で取得したレコードのfollowed_idを元に、フォローされる人-->
+<!--　の情報（followed:User)を順次followsに格納　　　　　　　 -->

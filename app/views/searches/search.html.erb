@@ -1,0 +1,16 @@
+<!--検索結果表示画面-->
+<% if @model == 'user' %>
+  <h3>Users Search for：<%= @content %></h3>
+  <% if @records.size == 0 %>
+    <p>No User matches the conditions</p>
+  <% else %>
+    <%= render 'users/index', users: @records %>
+  <% end %>
+<% else @model == 'book' %>
+  <h3>Books Search for：<%= @content %></h3>
+  <% if @records.size == 0 %>
+    <p>No User matches the conditions</p>
+  <% else %>
+    <%= render 'books/index', books: @records %>
+  <% end %>
+<% end %>

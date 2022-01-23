@@ -13,19 +13,28 @@ class SearchesController < ApplicationController
   def search_for(model,content,method)
     # 選択したモデルが'Uer'の場合
     if model == 'user'
-      if method == 'perfect'
+      case method
+      when 'perfect' then
         User.where(name: content)
-      else
+      when 'partial' then
         User.where('name LIKE ?','%'+content+'%')
+      when 'prefix' then
+        User.where('name LIKE ?', content+'%')
+      when 'backward' then
+        User.where('name LIKE ?', '%'+content)
       end
     # 選択したモデルが'Book'の場合
     elsif model == 'book'
-      if method == 'perfect'
+      case method
+      when 'perfect' then
         Book.where(title: content)
-      else
-         Book.where('title LIKE ?','%'+content+'%')
+      when 'partial' then
+        Book.where('title LIKE ?','%'+content+'%')
+      when 'prefix' then
+        Book.where('title LIKE ?', content+'%')
+      when 'backward' then
+        Book.where('title LIKE ?', '%'+content)
       end
     end
   end
-
 end

@@ -11,13 +11,13 @@
   <body>
     <!--ナビゲーションバー-->
     <%= render 'layouts/header' %>
-    <!--検索フォーム-->
-    <% if user_signed_in? %>
-      <%= render 'searches/form' %>
-    <% end %>
       <main>
         <!--エラーメッセージの表示-->
         <p id="notice"><%= notice %></p>
+        <!--検索フォーム-->
+        <% if user_signed_in? %>
+          <%= render 'searches/form' %>
+        <% end %>
         <!--個別のhtml表示箇所:yield-->
         <%= yield %>
       </main>

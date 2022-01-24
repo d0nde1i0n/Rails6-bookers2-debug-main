@@ -1,0 +1,22 @@
+<!--いいねボタン-->
+  <% if book.favorited_by?(current_user) %>
+     <%= link_to book_favorites_path(book),class: "text-danger",method: :delete,remote: true do %>
+        <i class="fas fa-heart"></i>
+        <%= book.favorites.count %>
+       <% end %>
+  <% else %>
+      <%= link_to book_favorites_path(book),class: "text-primary",method: :post,remote: true do %>
+        <i class="fas fa-heart"></i>
+        <%= book.favorites.count %>
+       <% end %>
+  <% end %>
+
+  <!--「remote: true」により、HTMLリクエストではなく、JavaScriptのリクエストを
+      対象のコントローラーに送る。-->
+
+  <!--HTMLリクエストの場合-->
+  <!--データベースにいいねを保存or削除し、画面にリダイレクトする(ページを読み込む)-->
+
+  <!--JavaScriptリクエストの場合-->
+  <!--データベースにいいねを保存or削除し、JavaScriptを使っていいね部分のみ更新する
+      (ページ読み込みなし)-->

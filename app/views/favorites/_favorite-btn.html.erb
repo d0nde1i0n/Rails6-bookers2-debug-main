@@ -1,11 +1,11 @@
 <!--いいねボタン-->
   <% if book.favorited_by?(current_user) %>
-     <%= link_to book_favorites_path(book),class: "text-danger",method: :delete,remote: true do %>
+     <%= link_to book_favorites_path(book),class: "favorite-btn text-danger",method: :delete,remote: true do %>
         <i class="fas fa-heart"></i>
         <%= book.favorites.count %>
        <% end %>
   <% else %>
-      <%= link_to book_favorites_path(book),class: "text-primary",method: :post,remote: true do %>
+      <%= link_to book_favorites_path(book),class: "favorite-btn text-primary",method: :post,remote: true do %>
         <i class="fas fa-heart"></i>
         <%= book.favorites.count %>
        <% end %>

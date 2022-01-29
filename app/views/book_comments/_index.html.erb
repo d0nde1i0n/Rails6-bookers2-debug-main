@@ -1,0 +1,28 @@
+<!--投稿コメント一覧-->
+<% book.book_comments.each do |book_comment| %>
+  <table>
+    <tbody>
+      <tr>
+        <th>
+          <%= link_to user_path(book) do %>
+            <%= image_tag book_comment.user.get_profile_image,size: '50x50'%><br>
+            <%= book_comment.user.name %>
+          <% end %>
+        </th>
+        <th class="w-100">
+          <p><%= book_comment.comment %></p>
+        </th>
+        <th>
+          <!--コメント削除ボタン-->
+          <% if book_comment.user_id == current_user.id %>
+            <%= link_to "Destroy",book_book_comment_path(book_comment.book,book_comment),
+                class: "text-center btn btn-danger",method: :delete,remote: true %>
+            <!--質問結果-->
+            <!--１つ目の変数「book_comment.book」部分は、投稿詳細画面に表示されている-->
+            <!--本のidが入力されればよいので、今回の場合は「book_comment」や「@book」で代用可能-->
+          <% end %>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

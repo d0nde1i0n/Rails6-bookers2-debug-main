@@ -5,8 +5,6 @@
 
 // いいね機能の非同期処理に「$が定義されていないという」エラーが発生
 //上記の解決策として、下記を2行を入力すると解決したがなぜ解決したのか不明・・・
-window.jQuery = $;
-window.$ = $;
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"

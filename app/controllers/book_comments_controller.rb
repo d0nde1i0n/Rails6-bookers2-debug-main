@@ -1,6 +1,6 @@
 class BookCommentsController < ApplicationController
 
-  def create
+def create
     # viewから取得したbook_idをキーとしてBookテーブル内で一致するidのレコードを取得し、
     # 変数bookに格納する
     @book = Book.find(params[:book_id])
@@ -13,7 +13,8 @@ class BookCommentsController < ApplicationController
     # saveメソッド実行
     comment.save
     # リファラ（リンク元のパス）を取得し、そのパスに遷移
-  end
+    # redirect_to request.referer
+end
 
   def destroy
     # viewから取得したコメントのidをキーとして、PostCommentモデルの該当レコードを削除
@@ -22,6 +23,7 @@ class BookCommentsController < ApplicationController
     # render後に使用するインスタンス変数
     @book = Book.find(params[:book_id])
     # リファラ（リンク元のパス）を取得し、そのパスに遷移
+    # 上記は、非同期処理のため削除
   end
 
   private
@@ -29,4 +31,5 @@ class BookCommentsController < ApplicationController
   def book_comment_params
     params.require(:book_comment).permit(:comment)
   end
+
 end

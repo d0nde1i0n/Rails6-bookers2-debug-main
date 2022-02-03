@@ -1,3 +1,4 @@
-<!--コメント削除機能のajax機能-->
+<!--コメント追加機能のajax機能-->
+$("#book-comments-count").html("<%= @book.book_comments.count %>");
 $("#comments-area").html("<%= j(render 'book_comments/index', book: @book) %>");
 $("textarea").val("");

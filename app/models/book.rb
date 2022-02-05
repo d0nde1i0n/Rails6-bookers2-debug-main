@@ -2,6 +2,7 @@ class Book < ApplicationRecord
 
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
+  validates :score,presence:true
 
   belongs_to :user
   has_many :favorites,dependent: :destroy

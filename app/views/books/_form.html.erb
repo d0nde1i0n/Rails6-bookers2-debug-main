@@ -1,22 +1,44 @@
+<!--投稿フォーム（部分テンプレート）-->
 <%= form_with model:book,local:true do |f| %>
- <div id="error_explanation">
-          <% if book.errors.any? %>
-          <h3><%= book.errors.count %>error prohibited this obj from being saved:</h3>
+  <!--エラーメッセージ-->
+  <div id="error_explanation">
+     <% if book.errors.any? %>
+         <h3><%= book.errors.count %>error prohibited this obj from being saved:</h3>
           <ul>
             <% book.errors.full_messages.each do |message| %>
             <li><%= message %></li>
             <% end %>
           </ul>
-            <% end %>
-        </div>
+     <% end %>
+  </div>
+  <!--本のタイトルを入力-->
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control book_title' %>
   </div>
+  <!--本の感想を入力-->
   <div class="form-group">
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <!--星レビューを入力-->
+  <div class="form-group mt-3">
+     <div class="score-input", id="star">
+       <span>Rate</span>
+       <%= f.hidden_field :score %>
+       <script>
+         $('#star').raty({
+           size      : 36,
+           starOff   : '<%= asset_path('star-off.png') %>',
+           starOn    : '<%= asset_path('star-on.png') %>',
+           starHalf  : '<%= asset_path('star-half.png') %>',
+           scoreName : 'book[score]',
+           half      : true,
+         });
+      </script>
+    </div>
+  </div>
+  <!--投稿ボタン-->
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>

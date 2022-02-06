@@ -1,3 +1,4 @@
+<!--投稿本一覧ページ-->
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <% if @book.errors.any? %>
@@ -18,6 +19,11 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
+      <!--ソート機能：詳細は「books_helper.rb」を確認すること-->
+      <%= sort_order "created_at","新しい順"%>
+      <span>|</span>
+      <%= sort_order "score","評価の高い順"%>
+      <!--投稿本一覧(部分テンプレート）-->
       <%= render 'index', books: @books %>
     </div>
   </div>

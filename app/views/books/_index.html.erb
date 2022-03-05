@@ -23,6 +23,12 @@
         <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
         <!--投稿された本の感想-->
         <td><%= book.body %></td>
+        <!--投稿された本にタグ付けされたカテゴリ-->
+        <td>
+          <% book.tags.each do |tag| %>
+            <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
+          <% end %>
+        </td>
         <!--いいねボタン-->
         <td id="favorite-btn-<%= book.id %>">
             <%= render 'favorites/favorite-btn',book: book %>

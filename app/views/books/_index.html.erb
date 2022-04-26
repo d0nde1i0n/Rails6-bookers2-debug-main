@@ -1,3 +1,4 @@
+<!--投稿一覧（部分テンプレート）-->
 <table class='table table-hover table-inverse'>
   <thead>
     <tr>
@@ -12,20 +13,33 @@
   <tbody>
     <% books.each do |book| %>
       <tr>
+        <!--投稿ユーザのプロフィール画像-->
         <td>
           <%= link_to(book.user) do %>
             <%= image_tag book.user.get_profile_image, size:'50x50' %>
           <% end %>
         </td>
+        <!--投稿された本のタイトル-->
         <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
+        <!--投稿された本の感想-->
         <td><%= book.body %></td>
+        <!--投稿された本にタグ付けされたカテゴリ-->
+        <td>
+          <% book.tags.each do |tag| %>
+            <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
+          <% end %>
+        </td>
+        <!--いいねボタン-->
         <td id="favorite-btn-<%= book.id %>">
-            <!--いいねボタン-->
             <%= render 'favorites/favorite-btn',book: book %>
         </td>
+        <!--コメント数-->
         <td>
-          <!--コメント数の表示-->
           コメント数:<%= book.book_comments.count %>
+        </td>
+        <!--星レビュー（部分テンプレート）-->
+        <td>
+          <%= render 'books/read_score',book: book %>
         </td>
       </tr>
     <% end %>

@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+  # ソート機能を使用するためにヘルパーメソッド追加
+  # 下記ヘルパーメソッドは「books_helperm.rb」で引用されている。
+  helper_method :sort_column, :sort_direction
 
   def show
     @book =  Book.find(params[:id])
@@ -8,14 +11,20 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    # ソートするために右辺をBook.allから下記のように変更
+    # sort_column:DBテーブルの中でソート対象となる列の名称を格納
+    # sort_direction:「asc（昇順）」、「desc（降順）」を格納
+    @books = Book.order("#{sort_column} #{sort_direction}")
     @book = Book.new
   end
 
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
+    # paramsの文字列を","で区切り、配列tag_listの各要素に格納
+    tag_list = params[:book][:tag_name].split(',')
     if @book.save
+      @book.save_tags(tag_list) #save_tagsメソッドは「book.rb」参照
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
@@ -50,6 +59,19 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title,:body)
+    params.require(:book).permit(:title,:body,:score)
   end
+
+  def sort_direction
+    # paramasに格納されている値が"asc"or"desc"であればそのままの値を、
+    # それ以外の値の場合"asc"を返す
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+
+  def sort_column
+    # paramasに格納されている値がBookモデルのテーブルのカラムに含まれている場合は
+    # そのままの値を、それ以外のばあいには"id"を返す。
+    Book.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+  end
+
 end

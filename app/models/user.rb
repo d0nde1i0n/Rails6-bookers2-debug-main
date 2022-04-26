@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :favorites,dependent: :destroy
   has_many :book_comments,dependent: :destroy
 
-  # 下記は回答を見て修正を実施
+  # 下記コメントは回答を見て修正を実施
   # 自分がフォローされる（被フォロー）側の可能性
   has_many :reverse_of_relationships,class_name: 'Relationship',foreign_key: :followed_id,dependent: :destroy
   # 自分がフォローする（与フォロー）側の関係性

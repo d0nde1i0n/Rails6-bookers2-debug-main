@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
   private
 
   def search_for(model,content,method)
-    # 選択したモデルが'Uer'の場合
+    # 選択したモデルが'User'の場合
     if model == 'user'
       case method
       when 'perfect' then
